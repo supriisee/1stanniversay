@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy 1st Anniversary, My Love</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================= VARIABLES & RESET ================= */
+        :root {
+            --bg-dark: #070303;
+            --bg-lighter: #150808;
+            --accent-gold: #d4af37;
+            --accent-gold-light: #fbe69b;
+            --accent-red: #8b0000;
+            --text-cream: #fdfaf3;
+            --soft-pink: #ffd1d8;
+            --font-heading: 'Cinzel', serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --font-handwriting: 'Dancing Script', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body, html {
+            width: 100%;
+            background-color: var(--bg-dark);
+            color: var(--text-cream);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Standardize scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #331111; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-red); }
+
+        /* ================= UTILITIES & EFFECTS ================= */
+        .gold-text {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .glass-panel {
+            background: rgba(25, 10, 10, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 209, 216, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ================= NAVIGATION ================= */
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            gap: 30px;
+            padding: 10px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .floating-nav a {
+            color: var(--text-cream);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+        .floating-nav a:hover {
+            opacity: 1;
+            color: var(--accent-gold);
+        }
+
+        /* ================= AUDIO BUTTON ================= */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(20, 5, 5, 0.8);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            transition: 0.3s;
+        }
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+        }
+
+        /* ================= HERO SECTION ================= */
+        #hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #26080b 0%, var(--bg-dark) 70%);
+        }
+
+        .hero-content {
+            z-index: 10;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-serif);
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-style: italic;
+            color: var(--soft-pink);
+            max-width: 800px;
+            margin: 0 auto 10px;
+            opacity: 0.9;
+        }
+
+        .hero-small {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 40px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            animation: bounce 2s infinite;
+            z-index: 10;
+        }
+
+        /* Particles container */
+        #particles {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ================= BIRD & LETTER TRANSITION ================= */
+        #bird-section {
+            height: 40vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .bird-container {
+            position: absolute;
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 3s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 50;
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+        }
+
+        .bird-container.fly-in {
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+
+        .bird-container.fly-away {
+            left: 120%;
+            transform: translate(0, -150%);
+            opacity: 0;
+        }
+
+        .bird-svg {
+            width: 80px;
+            height: auto;
+            fill: var(--text-cream);
+        }
+        
+        .letter-envelope {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 30px;
+            background: #fdfaf3;
+            border: 2px solid var(--accent-gold);
+            border-radius: 2px;
+            transition: 1s ease;
+        }
+
+        .letter-envelope.drop {
+            transform: translate(-50%, 150px) scale(1.5);
+            opacity: 0;
+        }
+
+        /* ================= THE LOVE LETTER ================= */
+        #letter-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+        #letter-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .letter-paper {
+            background-color: #f9f6ef;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+            width: 90%;
+            max-width: 650px;
+            max-height: 85vh;
+            padding: clamp(30px, 5vw, 60px);
+            border-radius: 4px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 40px rgba(212, 175, 55, 0.1);
+            position: relative;
+            overflow-y: auto;
+            color: #2c1a1a;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transform: translateY(50px) scale(0.9);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        #letter-overlay.active .letter-paper {
+            transform: translateY(0) scale(1);
+        }
+
+        .letter-paper::before {
+            content: '';
+            position: absolute;
+            top: 15px; left: 15px; right: 15px; bottom: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            pointer-events: none;
+        }
+
+        .letter-content {
+            font-family: var(--font-serif);
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            line-height: 1.8;
+        }
+
+        .letter-content .cursive {
+            font-family: var(--font-handwriting);
+            font-size: 1.5em;
+            color: var(--accent-red);
+            line-height: 1.2;
+            margin: 15px 0;
+            display: block;
+        }
+
+        .close-letter-btn {
+            display: block;
+            margin: 40px auto 0;
+            padding: 12px 30px;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: #2c1a1a;
+            font-family: var(--font-heading);
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+        .close-letter-btn:hover {
+            background: var(--accent-gold);
+            color: white;
+        }
+
+        .minimized-letter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(253, 250, 243, 0.1);
+            border: 1px solid var(--accent-gold);
+            border-radius: 50%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.5s;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+        .minimized-letter.visible {
+            opacity: 1;
+            pointer-events: all;
+            animation: subtleGlow 3s infinite;
+        }
+        .minimized-letter svg { width: 24px; fill: var(--accent-gold); }
+
+        /* ================= MEMORIES GALLERY ================= */
+        #memories {
+            padding: 100px 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, var(--bg-dark), var(--bg-lighter));
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 20px;
+        }
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 15px;
+        }
+        .section-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: var(--soft-pink);
+            font-size: 1.2rem;
+        }
+        
+        .gallery-category {
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin: 40px 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .gallery-category::before, .gallery-category::after {
+            content: '';
+            width: 50px;
+            height: 1px;
+            background: var(--accent-gold);
+            opacity: 0.5;
+        }
+
+        .scroll-row-container {
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .scroll-row-container:hover .scroll-track {
+            animation-play-state: paused;
+        }
+
+        .scroll-track {
+            display: flex;
+            width: max-content;
+            gap: 20px;
+            padding-left: 20px;
+            animation: scroll 40s linear infinite;
+            will-change: transform;
+        }
+
+        .scroll-track.reverse {
+            animation: scroll-reverse 45s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes scroll-reverse {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .memory-card {
+            width: clamp(200px, 30vw, 350px);
+            aspect-ratio: 4/5;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .memory-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+            z-index: 10;
+        }
+
+        .memory-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.4s;
+        }
+        .memory-card:hover img {
+            filter: brightness(0.8);
+        }
+
+        .memory-hover-icon {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            opacity: 0;
+            color: white;
+            font-size: 2rem;
+            transition: 0.3s;
+        }
+        .memory-card:hover .memory-hover-icon {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        /* ================= PHOTO MODAL ================= */
+        #photo-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 2, 2, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.4s ease;
+        }
+        #photo-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+        }
+
+        .modal-img-container {
+            position: relative;
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 8px;
+            padding: 10px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 40px rgba(139, 0, 0, 0.2);
+        }
+        .modal-img-container img {
+            max-width: 100%;
+            max-height: calc(70vh - 20px);
+            border-radius: 4px;
+            object-fit: contain;
+        }
+
+        .modal-text {
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+        .modal-caption {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-cream);
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 3010;
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .modal-nav:hover {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+        }
+        .modal-prev { left: 5%; }
+        .modal-next { right: 5%; }
+
+        /* ================= INTERACTIVE SECTION ================= */
+        #interactive {
+            padding: 100px 20px;
+            background: var(--bg-lighter);
+            text-align: center;
+            position: relative;
+        }
+
+        .stats-container {
+            margin-bottom: 60px;
+        }
+        .stats-title {
+            font-size: 1.2rem;
+            font-family: var(--font-serif);
+            margin-bottom: 10px;
+            color: var(--soft-pink);
+        }
+        .stats-number {
+            font-size: 5rem;
+            font-family: var(--font-heading);
+            background: linear-gradient(to right, #ffb6c1, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .love-button-container {
+            position: relative;
+            display: inline-block;
+        }
+        .love-btn {
+            background: rgba(139, 0, 0, 0.2);
+            border: 1px solid var(--accent-red);
+            color: var(--soft-pink);
+            padding: 15px 40px;
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .love-btn:hover {
+            background: var(--accent-red);
+            color: white;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.6);
+        }
+
+        .random-message {
+            margin-top: 20px;
+            min-height: 30px;
+            font-family: var(--font-handwriting);
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        /* ================= SECRET SURPRISE ================= */
+        .secret-egg {
+            position: absolute;
+            bottom: 20px; right: 20px;
+            width: 15px; height: 15px;
+            opacity: 0.05;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .secret-egg:hover { opacity: 0.5; }
+        
+        #secret-message {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: var(--glass-panel);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            z-index: 4000;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.5s;
+            border: 1px solid var(--accent-gold);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+            background: #0a0505;
+        }
+        #secret-message.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* ================= FINAL SECTION ================= */
+        #final {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px;
+            background: radial-gradient(circle at center, #1a0505 0%, #000000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-huge {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            z-index: 2;
+        }
+
+        .final-message {
+            font-family: var(--font-serif);
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-style: italic;
+            max-width: 800px;
+            margin: 40px auto;
+            color: var(--soft-pink);
+            line-height: 1.6;
+            z-index: 2;
+        }
+
+        .final-photo {
+            width: clamp(250px, 40vw, 400px);
+            aspect-ratio: 3/4;
+            margin: 50px auto;
+            border: 10px solid #f9f6ef;
+            border-bottom-width: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            transform: rotate(-3deg);
+            z-index: 2;
+            animation: floating 6s ease-in-out infinite;
+            background-color: #333;
+        }
+        .final-photo img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .final-photo-text {
+            position: absolute;
+            bottom: -32px;
+            left: 0; width: 100%;
+            text-align: center;
+            color: #111;
+            font-family: var(--font-handwriting);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .signature {
+            font-family: var(--font-handwriting);
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-top: 30px;
+            z-index: 2;
+        }
+
+        /* ================= ANIMATIONS ================= */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-15px) translateX(-50%); }
+            60% { transform: translateY(-7px) translateX(-50%); }
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-15px) rotate(-1deg); }
+        }
+        @keyframes subtleGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.6); }
+        }
+
+        /* Particles dynamically added via JS */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* ================= MEDIA QUERIES ================= */
+        @media (max-width: 768px) {
+            .floating-nav { display: none; }
+            .modal-nav { width: 40px; height: 40px; font-size: 1.2rem; }
+            .modal-prev { left: 10px; }
+            .modal-next { right: 10px; }
+            .modal-img-container { padding: 5px; }
+            .letter-paper { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= CONFIGURATION & DATA ================= -->
+    <script>
+        // EDIT THIS SECTION TO CUSTOMIZE YOUR WEBSITE
+        const CONFIG = {
+            boyName: "Raghav",
+            girlName: "Yuvika",
+            anniversaryDate: "September 1st, 2026",
+            
+            // Background Music (Provide a direct URL to an mp3 file or leave as is for romantic ambient piano placeholder)
+            musicSrc: "media\\loveuso.mp3", 
+            
+            // The Love Letter
+            letter: {
+                greeting: "To my Yuvika,",
+                body: `One whole year.<br><br>
+                       It feels strange trying to fit an entire year of memories, laughs, little arguments, late-night conversations, stupid jokes, beautiful moments, and everything in between into a few paragraphs.<br><br>
+                       You have become such a special part of my life, and somehow the ordinary moments with you have become some of my <span class="cursive">favourite memories.</span><br><br>
+                       Thank you for being there, for understanding me, for putting up with me, for making me laugh, and for simply being you.<br><br>
+                       This year has given me so many memories that I never want to forget, and if this is only the beginning, I can't wait to see everything that comes next.<br><br>
+                       Happy one year, my love.<br><br>
+                       Here's to us — to everything we've been, everything we are, and everything we're still going to become.`,
+                signoff: "Forever yours ❤️"
+            },
+
+            // Interactive Love Button Messages
+            randomMessages: [
+                "You're my favourite person.",
+                "I'd choose you again and again.",
+                "Still crazy about you.",
+                "One year down. Forever to go.",
+                "You make my world better.",
+                "I love your smile.",
+                "Thank you for being you.",
+                "Home is wherever I'm with you.",
+                "You are my greatest adventure.",
+                "Loving you is the easiest thing I've ever done.",
+                "You have my whole heart for my whole life.",
+                "My favorite place is inside your hug.",
+                "You're my today and all of my tomorrows.",
+                "I look at you and see the rest of my life.",
+                "Life is better with you by my side.",
+                "You are the best part of every day.",
+                "My soulmate and my best friend.",
+                "I love you more today than yesterday.",
+                "You're my happy place.",
+                "Every love story is beautiful, but ours is my favourite.",
+                "I never want to stop making memories with you.",
+                "You are everything I never knew I needed."
+            ],
+
+            // Final Framed Photo
+            finalPhoto: {
+                // To use your own photo, change this URL to a local path like "images/us.jpg"
+                src: "media/da.jpg",
+                text: "My favourite story."
+            },
+
+            // Memory Gallery Photos
+            // Add as many as you like. They will be distributed automatically into scrolling rows.
+            memories: [
+                { src: "media/a (1).jpg", title: "The Beginning", caption: "Where it all started. I was so nervous but so happy." },
+                { src: "media/a (2).jpg", title: "Our First Date", caption: "I couldn't take my eyes off you." },
+                { src: "media/a (3).jpg", title: "Little Moments", caption: "Just us being us. These are the moments I live for." },
+                { src: "media/a (4).jpg", title: "Adventures", caption: "Exploring the world is better with you by my side." },
+                { src: "media/a (5).jpg", title: "Late Night Talks", caption: "Losing track of time because talking to you is so easy." },
+                { src: "media/a (6).jpg", title: "My Favourite Smile", caption: "I hope I never stop making you smile like this." },
+                { src: "media/a (7).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (8).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (9).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (10).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (11).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (12).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (13).jpg", title: "Always You", caption: "In a room full of art, I'd still stare at you." },
+                { src: "media/a (14).jpg", title: "Our First Date", caption: "I couldn't take my eyes off you." },
+                { src: "media/a (15).jpg", title: "Little Moments", caption: "Just us being us. These are the moments I live for." },
+                { src: "media/a (16).jpg", title: "Adventures", caption: "Exploring the world is better with you by my side." },
+                { src: "media/a (17).jpg", title: "Late Night Talks", caption: "Losing track of time because talking to you is so easy." },
+                { src: "media/a (18).jpg", title: "My Favourite Smile", caption: "I hope I never stop making you smile like this." },
+                { src: "media/a (19).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (20).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (21).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (22).jpg", title: "Always You", caption: "In a room full of art, I'd still stare at you." },
+                { src: "media/a (23).jpg", title: "Our First Date", caption: "I couldn't take my eyes off you." },
+                { src: "media/a (24).jpg", title: "Little Moments", caption: "Just us being us. These are the moments I live for." },
+                { src: "media/a (25).jpg", title: "Adventures", caption: "Exploring the world is better with you by my side." },
+                { src: "media/a (26).jpg", title: "Late Night Talks", caption: "Losing track of time because talking to you is so easy." },
+                { src: "media/a (27).jpg", title: "My Favourite Smile", caption: "I hope I never stop making you smile like this." },
+                { src: "media/a (28).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (29).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (30).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (31).jpg", title: "Always You", caption: "In a room full of art, I'd still stare at you." },
+                { src: "media/a (32).jpg", title: "The Beginning", caption: "Where it all started. I was so nervous but so happy." },
+                { src: "media/a (33).jpg", title: "Our First Date", caption: "I couldn't take my eyes off you." },
+                { src: "media/a (34).jpg", title: "Little Moments", caption: "Just us being us. These are the moments I live for." },
+                { src: "media/a (35).jpg", title: "Adventures", caption: "Exploring the world is better with you by my side." },
+                { src: "media/a (36).jpg", title: "Late Night Talks", caption: "Losing track of time because talking to you is so easy." },
+                { src: "media/a (37).jpg", title: "My Favourite Smile", caption: "I hope I never stop making you smile like this." },
+                { src: "media/a (38).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (39).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (40).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (41).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (42).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (43).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (44).jpg", title: "Always You", caption: "In a room full of art, I'd still stare at you." },
+                { src: "media/a (45).jpg", title: "Our First Date", caption: "I couldn't take my eyes off you." },
+                { src: "media/a (46).jpg", title: "Little Moments", caption: "Just us being us. These are the moments I live for." },
+                { src: "media/a (47).jpg", title: "Adventures", caption: "Exploring the world is better with you by my side." },
+                { src: "media/a (48).jpg", title: "Late Night Talks", caption: "Losing track of time because talking to you is so easy." },
+                { src: "media/a (49).jpg", title: "My Favourite Smile", caption: "I hope I never stop making you smile like this." },
+                { src: "media/a (50).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (51).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (52).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (53).jpg", title: "Always You", caption: "In a room full of art, I'd still stare at you." },
+                { src: "media/a (54).jpg", title: "The Beginning", caption: "Where it all started. I was so nervous but so happy." },
+                { src: "media/a (55).jpg", title: "Our First Date", caption: "I couldn't take my eyes off you." },
+                { src: "media/a (56).jpg", title: "Little Moments", caption: "Just us being us. These are the moments I live for." },
+                { src: "media/a (57).jpg", title: "Adventures", caption: "Exploring the world is better with you by my side." },
+                { src: "media/a (58).jpg", title: "Late Night Talks", caption: "Losing track of time because talking to you is so easy." },
+                { src: "media/a (59).jpg", title: "My Favourite Smile", caption: "I hope I never stop making you smile like this." },
+                { src: "media/a (60).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (61).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (62).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (63).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (64).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (65).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (66).jpg", title: "Always You", caption: "In a room full of art, I'd still stare at you." },
+                { src: "media/a (67).jpg", title: "Our First Date", caption: "I couldn't take my eyes off you." },
+                { src: "media/a (68).jpg", title: "Little Moments", caption: "Just us being us. These are the moments I live for." },
+                { src: "media/a (69).jpg", title: "Adventures", caption: "Exploring the world is better with you by my side." },
+                { src: "media/a (70).jpg", title: "Late Night Talks", caption: "Losing track of time because talking to you is so easy." },
+                { src: "media/a (71).jpg", title: "My Favourite Smile", caption: "I hope I never stop making you smile like this." },
+                { src: "media/a (72).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (73).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (74).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (75).jpg", title: "Always You", caption: "In a room full of art, I'd still stare at you." },
+                { src: "media/a (76).jpg", title: "Our First Date", caption: "I couldn't take my eyes off you." },
+                { src: "media/a (77).jpg", title: "Little Moments", caption: "Just us being us. These are the moments I live for." },
+                { src: "media/a (78).jpg", title: "Adventures", caption: "Exploring the world is better with you by my side." },
+                { src: "media/a (79).jpg", title: "Late Night Talks", caption: "Losing track of time because talking to you is so easy." },
+                { src: "media/a (80).jpg", title: "My Favourite Smile", caption: "I hope I never stop making you smile like this." },
+                { src: "media/a (81).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (82).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (83).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (84).jpg", title: "Always You", caption: "In a room full of art, I'd still stare at you." },
+                { src: "media/a (85).jpg", title: "The Beginning", caption: "Where it all started. I was so nervous but so happy." },
+                { src: "media/a (86).jpg", title: "Our First Date", caption: "I couldn't take my eyes off you." },
+                { src: "media/a (87).jpg", title: "Little Moments", caption: "Just us being us. These are the moments I live for." },
+                { src: "media/a (88).jpg", title: "Adventures", caption: "Exploring the world is better with you by my side." },
+                { src: "media/a (89).jpg", title: "Late Night Talks", caption: "Losing track of time because talking to you is so easy." },
+                { src: "media/a (90).jpg", title: "My Favourite Smile", caption: "I hope I never stop making you smile like this." },
+                { src: "media/a (91).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (92).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (93).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (94).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (95).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (96).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (97).jpg", title: "Always You", caption: "In a room full of art, I'd still stare at you." },
+                { src: "media/a (98).jpg", title: "Our First Date", caption: "I couldn't take my eyes off you." },
+                { src: "media/a (99).jpg", title: "Little Moments", caption: "Just us being us. These are the moments I live for." },
+                { src: "media/a (100).jpg", title: "Adventures", caption: "Exploring the world is better with you by my side." },
+                { src: "media/a (101).jpg", title: "Late Night Talks", caption: "Losing track of time because talking to you is so easy." },
+                { src: "media/a (102).jpg", title: "My Favourite Smile", caption: "I hope I never stop making you smile like this." },
+                { src: "media/a (103).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (104).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (105).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." },
+                { src: "media/a (106).jpg", title: "Always You", caption: "In a room full of art, I'd still stare at you." },
+                { src: "media/a (107).jpg", title: "The Beginning", caption: "Where it all started. I was so nervous but so happy." },
+                { src: "media/a (108).jpg", title: "Our First Date", caption: "I couldn't take my eyes off you." },
+                { src: "media/a (109).jpg", title: "Little Moments", caption: "Just us being us. These are the moments I live for." },
+                { src: "media/a (110).jpg", title: "Adventures", caption: "Exploring the world is better with you by my side." },
+                { src: "media/a (111).jpg", title: "Late Night Talks", caption: "Losing track of time because talking to you is so easy." },
+                { src: "media/a (112).jpg", title: "My Favourite Smile", caption: "I hope I never stop making you smile like this." },
+                { src: "media/a (113).jpg", title: "Cozy Afternoons", caption: "Doing absolutely nothing, but feeling completely full." },
+                { src: "media/a (114).jpg", title: "Looking Forward", caption: "Every picture is a promise of more memories to come." },
+                { src: "media/a (115).jpg", title: "A Perfect Day", caption: "I don't think you know how happy I was that day." }
+            ]
+        };
+    </script>
+
+    <!-- ================= UI ELEMENTS ================= -->
+    <nav class="floating-nav glass-panel">
+        <a href="#hero">Home</a>
+        <a href="#memories">Memories</a>
+        <a href="#interactive">Love</a>
+        <a href="#final">Forever</a>
+    </nav>
+
+    <button class="music-btn" id="music-btn">🔇</button>
+    <audio id="bg-music" loop>
+        <!-- Source is injected via JS -->
+    </audio>
+
+    <div class="minimized-letter" id="minimized-letter" onclick="openLetter()">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/></svg>
+    </div>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="hero">
+        <div id="particles"></div>
+        <div class="hero-content">
+            <p class="hero-small gold-text" id="date-display">September 1st, 2026</p>
+            <h1 class="hero-title">
+                <span class="gold-text">HAPPY 1st ANNIVERSARY</span><br>
+                YUVIKA
+            </h1>
+            <p class="hero-subtitle">One year of us, a thousand memories, and a lifetime still waiting to be written.</p>
+            <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.6; font-family: var(--font-serif);">This little corner of the internet is just for you.</p>
+        </div>
+        <div class="scroll-indicator">Scroll to begin our story ↓</div>
+    </section>
+
+    <!-- ================= BIRD & LETTER TRIGGER ================= -->
+    <section id="bird-section">
+        <div class="bird-container" id="bird-anim">
+            <!-- Elegant SVG Bird -->
+            <svg class="bird-svg" viewBox="0 0 100 100">
+                <path d="M10,50 Q40,30 60,40 Q80,20 90,40 Q80,60 60,50 Q40,70 10,50 Z" />
+                <path d="M60,40 Q70,20 80,30" stroke="var(--text-cream)" stroke-width="2" fill="none" />
+                <circle cx="80" cy="40" r="2" fill="var(--bg-dark)" />
+            </svg>
+            <div class="letter-envelope" id="bird-envelope"></div>
+        </div>
+    </section>
+
+    <!-- Letter Modal Overlay -->
+    <div id="letter-overlay">
+        <div class="letter-paper">
+            <div class="letter-content" id="letter-content-div">
+                <!-- Injected via JS -->
+            </div>
+            <button class="close-letter-btn" onclick="minimizeLetter()">Keep this letter with you</button>
+        </div>
+    </div>
+
+    <!-- ================= MEMORIES SECTION ================= -->
+    <section id="memories">
+        <div class="section-header">
+            <h2 class="section-title gold-text">OUR MEMORIES</h2>
+            <p class="section-subtitle">A year of moments I'll always want to remember.</p>
+        </div>
+
+        <div id="gallery-container">
+            <!-- Rows are dynamically generated here -->
+        </div>
+    </section>
+
+    <!-- Photo Modal Overlay -->
+    <div id="photo-modal">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <div class="modal-nav modal-prev" onclick="prevPhoto(event)">‹</div>
+        <div class="modal-content">
+            <div class="modal-img-container">
+                <img id="modal-img" src="" alt="Memory">
+            </div>
+            <div class="modal-text">
+                <h3 class="modal-title" id="modal-title">Title</h3>
+                <p class="modal-caption" id="modal-caption">Caption</p>
+            </div>
+        </div>
+        <div class="modal-nav modal-next" onclick="nextPhoto(event)">›</div>
+    </div>
+
+    <!-- ================= INTERACTIVE SECTION ================= -->
+    <section id="interactive">
+        <div class="stats-container">
+            <p class="stats-title">Times you've made me smile this year:</p>
+            <div class="stats-number">∞</div>
+            <p style="font-family: var(--font-serif); opacity: 0.7; margin-top: 10px;">Honestly, I stopped counting.</p>
+        </div>
+
+        <div class="love-button-container">
+            <button class="love-btn" id="love-btn">Press this ❤️</button>
+            <div class="random-message" id="random-msg"></div>
+        </div>
+
+        <!-- Secret Easter Egg -->
+        <svg class="secret-egg" id="secret-egg" viewBox="0 0 24 24" fill="var(--accent-gold)">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+    </section>
+
+    <div id="secret-message">
+        <h3 style="color: var(--accent-gold); font-family: var(--font-heading); margin-bottom: 15px;">You found my secret.</h3>
+        <p style="font-family: var(--font-serif); font-size: 1.2rem; line-height: 1.6;">If I could relive this year, I'd choose every moment with you all over again.</p>
+        <button style="margin-top: 20px; padding: 5px 15px; background: none; border: 1px solid var(--accent-gold); color: white; cursor: pointer;" onclick="document.getElementById('secret-message').classList.remove('active')">Close</button>
+    </div>
+
+    <!-- ================= FINAL SECTION ================= -->
+    <section id="final">
+        <div id="final-particles"></div>
+        <h1 class="final-huge">ONE YEAR DOWN.</h1>
+        <h1 class="final-huge gold-text" style="margin-top: -20px;">A LIFETIME TO GO.</h1>
+        
+        <p class="final-message">
+            Thank you for making this year so beautiful.<br><br>
+            No matter how many memories we make, I hope we never stop making the little ones that mean the most.
+        </p>
+
+        <div class="final-photo">
+            <img id="final-img" src="" alt="Us">
+            <div class="final-photo-text" id="final-img-text"></div>
+        </div>
+
+        <p style="font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 2px; margin-top: 40px;">Happy Anniversary, my love.</p>
+        <p style="font-family: var(--font-heading); font-size: 1.2rem; margin-top: 10px; color: var(--soft-pink);">I love you.</p>
+        
+        <div class="signature" id="signature-name"></div>
+    </section>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        /* --- Initialization from CONFIG --- */
+        document.getElementById('date-display').textContent = CONFIG.anniversaryDate;
+        
+        const letterHtml = `
+            <p>${CONFIG.letter.greeting}</p><br>
+            <p>${CONFIG.letter.body}</p><br>
+            <p class="cursive">${CONFIG.letter.signoff}</p>
+            <p>${CONFIG.boyName}</p>
+        `;
+        document.getElementById('letter-content-div').innerHTML = letterHtml;
+        
+        document.getElementById('final-img').src = CONFIG.finalPhoto.src;
+        document.getElementById('final-img-text').textContent = CONFIG.finalPhoto.text;
+        document.getElementById('signature-name').textContent = CONFIG.boyName;
+
+        document.getElementById('bg-music').src = CONFIG.musicSrc;
+
+        /* --- Music Controls --- */
+        const musicBtn = document.getElementById('music-btn');
+        const bgMusic = document.getElementById('bg-music');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+            } else {
+                bgMusic.play().catch(e => console.log("Audio play failed:", e));
+                musicBtn.textContent = '🎵';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        /* --- Hero Particles (Confetti/Petals/Balloons) --- */
+        function createHeroParticles() {
+            const container = document.getElementById('particles');
+            const colors = ['#8b0000', '#ffd1d8', '#d4af37', '#ffffff'];
+            
+            for(let i=0; i<40; i++) {
+                let p = document.createElement('div');
+                p.classList.add('particle');
+                
+                // Random properties
+                let size = Math.random() * 8 + 4;
+                let left = Math.random() * 100;
+                let duration = Math.random() * 5 + 3;
+                let delay = Math.random() * 2;
+                
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
+                p.style.left = left + 'vw';
+                p.style.top = '-10vh';
+                p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                p.style.animationDuration = duration + 's';
+                p.style.animationDelay = delay + 's';
+                
+                // Some petals (ovals)
+                if(Math.random() > 0.5) p.style.borderRadius = '50% 0 50% 0';
+                
+                container.appendChild(p);
+            }
+        }
+        createHeroParticles();
+
+        /* --- Bird & Letter Logic --- */
+        const birdAnim = document.getElementById('bird-anim');
+        const birdEnvelope = document.getElementById('bird-envelope');
+        const letterOverlay = document.getElementById('letter-overlay');
+        const minimizedLetter = document.getElementById('minimized-letter');
+        let birdTriggered = false;
+
+        // Trigger bird when scrolling down
+        window.addEventListener('scroll', () => {
+            const birdSection = document.getElementById('bird-section');
+            const rect = birdSection.getBoundingClientRect();
+            
+            if (rect.top < window.innerHeight * 0.7 && !birdTriggered) {
+                birdTriggered = true;
+                
+                // 1. Fly to center
+                birdAnim.classList.add('fly-in');
+                
+                // 2. Drop envelope
+                setTimeout(() => {
+                    birdEnvelope.classList.add('drop');
+                }, 2000);
+
+                // 3. Fly away and open letter
+                setTimeout(() => {
+                    birdAnim.classList.replace('fly-in', 'fly-away');
+                    openLetter();
+                }, 3000);
+            }
+        });
+
+        function openLetter() {
+            letterOverlay.classList.add('active');
+            minimizedLetter.classList.remove('visible');
+            document.body.style.overflow = 'hidden'; // prevent background scrolling
+        }
+
+        function minimizeLetter() {
+            letterOverlay.classList.remove('active');
+            minimizedLetter.classList.add('visible');
+            document.body.style.overflow = 'auto';
+        }
+
+        /* --- Infinite Gallery Generation --- */
+        const galleryContainer = document.getElementById('gallery-container');
+        const categories = ["The Beginning", "Us Being Us", "Little Moments"];
+        
+        // Split memories into chunks for rows
+        const itemsPerRow = Math.ceil(CONFIG.memories.length / 3);
+        const rows = [
+            CONFIG.memories.slice(0, itemsPerRow),
+            CONFIG.memories.slice(itemsPerRow, itemsPerRow * 2),
+            CONFIG.memories.slice(itemsPerRow * 2)
+        ];
+
+        rows.forEach((rowItems, index) => {
+            if(rowItems.length === 0) return;
+
+            // Category Header
+            let catDiv = document.createElement('div');
+            catDiv.className = 'gallery-category';
+            catDiv.textContent = categories[index % categories.length];
+            galleryContainer.appendChild(catDiv);
+
+            // Row Container
+            let rowContainer = document.createElement('div');
+            rowContainer.className = 'scroll-row-container';
+
+            // Track
+            let track = document.createElement('div');
+            track.className = 'scroll-track';
+            if (index % 2 !== 0) track.classList.add('reverse');
+
+            // We duplicate the items enough times to fill the screen for seamless loop
+            // For a robust infinite marquee, render the array 4 times
+            let loopedItems = [...rowItems, ...rowItems];
+
+            loopedItems.forEach((mem, idx) => {
+                let card = document.createElement('div');
+                card.className = 'memory-card';
+                // Attach real index based on original array to find it later
+                let globalIndex = CONFIG.memories.findIndex(m => m.src === mem.src);
+                card.onclick = () => openModal(globalIndex);
+                
+                card.innerHTML = `
+                    <img src="${mem.src}" loading="lazy" alt="Memory">
+                    <div class="memory-hover-icon">❤️</div>
+                `;
+                track.appendChild(card);
+            });
+
+            rowContainer.appendChild(track);
+            galleryContainer.appendChild(rowContainer);
+        });
+
+        /* --- Photo Modal Logic --- */
+        const modal = document.getElementById('photo-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalCaption = document.getElementById('modal-caption');
+        let currentPhotoIndex = 0;
+
+        function openModal(index) {
+            currentPhotoIndex = index;
+            updateModalContent();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateModalContent() {
+            const data = CONFIG.memories[currentPhotoIndex];
+            modalImg.src = data.src;
+            modalTitle.textContent = data.title;
+            modalCaption.textContent = data.caption;
+        }
+
+        function nextPhoto(e) {
+            if(e) e.stopPropagation();
+            currentPhotoIndex = (currentPhotoIndex + 1) % CONFIG.memories.length;
+            updateModalContent();
+        }
+
+        function prevPhoto(e) {
+            if(e) e.stopPropagation();
+            currentPhotoIndex = (currentPhotoIndex - 1 + CONFIG.memories.length) % CONFIG.memories.length;
+            updateModalContent();
+        }
+
+        // Mobile Swipe
+        let touchstartX = 0;
+        let touchendX = 0;
+        modal.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+        modal.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        function handleSwipe() {
+            if (touchendX < touchstartX - 50) nextPhoto();
+            if (touchendX > touchstartX + 50) prevPhoto();
+        }
+
+        // Close on background click
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) closeModal();
+        });
+
+        /* --- Interactive Love Button --- */
+        const loveBtn = document.getElementById('love-btn');
+        const randomMsg = document.getElementById('random-msg');
+
+        loveBtn.addEventListener('click', (e) => {
+            // Heart burst effect
+            for(let i=0; i<10; i++) {
+                let heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'absolute';
+                heart.style.left = (e.clientX || loveBtn.getBoundingClientRect().left) + 'px';
+                heart.style.top = (e.clientY || loveBtn.getBoundingClientRect().top) + 'px';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.pointerEvents = 'none';
+                heart.style.transition = 'all 1s ease-out';
+                heart.style.zIndex = '1000';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.style.transform = `translate(${(Math.random()-0.5)*200}px, -${Math.random()*200 + 50}px) scale(0)`;
+                    heart.style.opacity = '0';
+                }, 10);
+
+                setTimeout(() => heart.remove(), 1000);
+            }
+
+            // Show random message
+            randomMsg.style.opacity = 0;
+            setTimeout(() => {
+                let msg = CONFIG.randomMessages[Math.floor(Math.random() * CONFIG.randomMessages.length)];
+                randomMsg.textContent = msg;
+                randomMsg.style.opacity = 1;
+            }, 300);
+        });
+
+        /* --- Secret Surprise --- */
+        const secretEgg = document.getElementById('secret-egg');
+        const secretMessage = document.getElementById('secret-message');
+
+        secretEgg.addEventListener('click', () => {
+            secretMessage.classList.add('active');
+            
+            // Sparkle effect
+            for(let i=0; i<20; i++) {
+                let spark = document.createElement('div');
+                spark.style.position = 'fixed';
+                spark.style.width = '5px';
+                spark.style.height = '5px';
+                spark.style.backgroundColor = '#d4af37';
+                spark.style.borderRadius = '50%';
+                spark.style.left = '50%';
+                spark.style.top = '50%';
+                spark.style.zIndex = '4005';
+                spark.style.transition = 'all 1s ease-out';
+                document.body.appendChild(spark);
+
+                setTimeout(() => {
+                    let angle = Math.random() * Math.PI * 2;
+                    let radius = Math.random() * 150 + 50;
+                    spark.style.transform = `translate(${Math.cos(angle)*radius}px, ${Math.sin(angle)*radius}px)`;
+                    spark.style.opacity = '0';
+                }, 10);
+                setTimeout(() => spark.remove(), 1000);
+            }
+        });
+
+    </script>
+</body>
+</html>
